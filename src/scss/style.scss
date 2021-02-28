@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import 'variables.scss';
+@import './libs/_normalize.scss';
+@import 'searchandsort.scss';
+@import 'types.scss';
+
+body {
+  background-color: rgb(216, 216, 216);
+}
+
+.container {
+  margin: 0px auto;
+  background-image: url('../assets/img/background.jpg');
+}
+.main {
+  &-navigation {
+    background-color: rgb(46, 45, 45);
+  }
+  &-title {
+    font-family: 'Press Start 2P';
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #616161;
+  }
+  &-header-logo {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    img {
+      max-width: 60%;
+    }
+  }
+}
+
+.pokedex {
+  &-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+  }
+  &-item {
+    margin: 10px;
+    width: 250px;
+    border: 1px solid #616161;
+    border-radius: 2%;
+    background-color: white;
+    img {
+      border-radius: 3%;
+      width: 100%;
+    }
+  }
+}
+
+.pokemon {
+  &-info {
+    text-align: left;
+    margin-left: 3%;
+    .id {
+      font-size: 15px;
+    }
+  }
+  &-name {
+    font-family: 'Press Start 2P';
+    font-size: 15px;
+    line-height: 18px;
+    color: rgb(253, 69, 69);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  &-abilities {
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    width: 33%;
+    text-align: center;
+
+    border-radius: 5px;
+
+    span {
+      color: white;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+}
+
+footer {
+  background-color: rgb(46, 45, 45);
+  height: 50px;
+  text-align: center;
+}
+
+@media (min-width: $tablet-width) {
+  body {
+    background-image: url('../assets/img/images.jpg');
+  }
+  .container {
+    max-width: 90%;
+  }
+  .pokedex-item {
+    max-width: 30%;
+  }
+}
+
+@media (min-width: $desktop-width) {
+  .container {
+    max-width: 1100px;
+  }
+  .pokedex-item {
+    max-width: 20%;
+  }
+}

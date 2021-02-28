@@ -1,0 +1,112 @@
+@import 'variables.scss';
+
+.search-and-sort {
+  display: block;
+  width: 90%;
+  margin-top: 20px;
+  margin-left: 5%;
+}
+
+.search {
+  font-size: 20px;
+  background-color: rgb(46, 45, 45);
+  border-radius: 10px;
+  line-height: 20px;
+  padding: 10px;
+  height: 40px;
+
+  input {
+    font-size: 14px;
+    border: 1px solid grey;
+    border-radius: 5px 0 0 5px;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  button {
+    width: 20%;
+    height: 21px;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    background-image: url('../assets/img/search.png');
+    background-color: #ffcb43;
+    float: left;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+.sort {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(46, 45, 45);
+  margin-top: 10px;
+  border-radius: 10px;
+  flex-direction: column;
+
+  &-selected {
+    // padding-top: 2px;
+    font-size: 20px;
+    color: white;
+    padding: 6px 0px;
+    text-align: center;
+  }
+  &-arrow {
+    // display: none;
+    position: absolute;
+    right: 12%;
+    margin-top: 2px;
+    transform: rotate(-90deg);
+    fill: white;
+
+    svg {
+      width: 20px;
+    }
+  }
+  &-pokedex {
+    display: none;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  &-item {
+    padding: 8px 0px;
+    border-top: 1px solid #616161;
+
+    &:hover {
+      color: slategray;
+    }
+  }
+  &:hover {
+    .sort-selected {
+      color: slategray;
+    }
+    .sort-arrow {
+      fill: slategray;
+    }
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .search-and-sort {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .search {
+    height: 40px;
+    width: 100%;
+    margin-right: 10px;
+  }
+  .sort {
+    width: 100%;
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,5 @@
+@import 'variables.scss';
+
+@mixin type($class) {
+  background-color: $class;
+}
