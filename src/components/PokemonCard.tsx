@@ -8,7 +8,7 @@ type data = {
 };
 
 const PokemonCard: React.FC<data> = (data: data) => {
-  const { name, url } = data;
+  const { url } = data;
 
   const [pokemonInfo, setPokemonInfo] = React.useState<PokemonInfo>();
 

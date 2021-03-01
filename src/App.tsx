@@ -2,19 +2,34 @@ import React from 'react';
 import logo from '../src/assets/img/poke-logo.svg';
 import PokemonCard from './components/PokemonCard';
 import axios from 'axios';
+import Search from './components/Search';
+import ButtonNext from './components/ButtonNext';
 
-type Pokemon = {
+type PokemonList = {
   name: string;
   url: string;
 };
 
 function App() {
-  const [pokemonData, setPokemonData] = React.useState<Pokemon[]>([]);
+  const [pokemonData, setPokemonData] = React.useState<PokemonList[]>([]);
+  const [nextUrl, setNextUrl] = React.useState<string>('https://pokeapi.co/api/v2/pokemon');
 
   const loadPokemons = async () => {
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
     const data = response.data.results;
+    const nextUrl = response.data.next;
     setPokemonData(data);
+    setNextUrl(nextUrl);
+  };
+
+  const onHandleNext = async () => {
+    if (nextUrl !== null) {
+      const response = await axios.get(nextUrl);
+      const data = response.data.results;
+      const next = response.data.next;
+      setPokemonData([...pokemonData, ...data]);
+      setNextUrl(next);
+    }
   };
 
   React.useEffect(() => {
@@ -35,14 +50,7 @@ function App() {
           <h1 className="main-title">POKEDEX</h1>
 
           <div className="search-and-sort">
-            <div className="search">
-              <form action="get">
-                <input id="search" placeholder="Введите имя или номер" type="text" />
-                <button type="submit">
-                  <i className="button-img"></i>
-                </button>
-              </form>
-            </div>
+            <Search />
             <div className="sort">
               <label className="sort-selected">Сортировать</label>
               <span className="sort-arrow">
@@ -64,12 +72,11 @@ function App() {
 
           <div className="pokedex">
             <ul className="pokedex-list">
-              {pokemonData.map((object: Pokemon) => {
-                return (
-                  <PokemonCard key={object.name + object.url} name={object.name} url={object.url} />
-                );
+              {pokemonData.map((object: PokemonList) => {
+                return <PokemonCard key={object.url} name={object.name} url={object.url} />;
               })}
             </ul>
+            <ButtonNext onLoad={onHandleNext} />
           </div>
         </main>
         <footer className="footer">Stakyy</footer>
