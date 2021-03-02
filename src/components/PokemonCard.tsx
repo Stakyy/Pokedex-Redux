@@ -3,7 +3,6 @@ import { PokemonInfo } from '../interfaces';
 import axios from 'axios';
 
 type data = {
-  name: string;
   url: string;
 };
 
@@ -40,11 +39,13 @@ const PokemonCard: React.FC<data> = (data: data) => {
               ? '0' + pokemonInfo?.id
               : pokemonInfo?.id}
           </p>
-          <h5 className="pokemon-name">{pokemonInfo?.name}</h5>
+          <h5 className="pokemon-name">
+            {pokemonInfo?.name[0].toUpperCase() + '' + pokemonInfo?.name.slice(1)}
+          </h5>
           {pokemonInfo?.types.map((type) => {
             return (
               <div className={'pokemon-abilities ' + type.type.name}>
-                <span style={{ color: '#000000' }}>{type.type.name}</span>
+                <span>{type.type.name}</span>
               </div>
             );
           })}

@@ -10,18 +10,23 @@ type PokemonList = {
   url: string;
 };
 
+const url = 'https://pokeapi.co/api/v2/pokemon';
+
 function App() {
   const [pokemonData, setPokemonData] = React.useState<PokemonList[]>([]);
-  const [nextUrl, setNextUrl] = React.useState<string>('https://pokeapi.co/api/v2/pokemon');
+  const [nextUrl, setNextUrl] = React.useState<string>(url);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
+  //стартовая загрузка покемонов
   const loadPokemons = async () => {
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
     const data = response.data.results;
     const nextUrl = response.data.next;
     setPokemonData(data);
     setNextUrl(nextUrl);
+    setIsLoading(false);
   };
-
+  // Загрузка покемонов по кнопке
   const onHandleNext = async () => {
     if (nextUrl !== null) {
       const response = await axios.get(nextUrl);
@@ -29,6 +34,31 @@ function App() {
       const next = response.data.next;
       setPokemonData([...pokemonData, ...data]);
       setNextUrl(next);
+    }
+  };
+
+  const fetchPokemon = async (link: string) => {
+    const response = await axios.get(link);
+    const name = response.data.name;
+
+    setPokemonData([{ name: name, url: link }]);
+  };
+
+  //Функция поиска покемона из инпута
+  const getPokemon = async (nameOrNumber: any) => {
+    let link: string;
+
+    if (nameOrNumber === '') {
+      loadPokemons();
+    } else if (!isNaN(nameOrNumber)) {
+      link = `${url}/${nameOrNumber}/`;
+      fetchPokemon(link);
+    } else {
+      link = `${url}/${nameOrNumber.toLowerCase()}/`;
+      const response = await axios.get(link);
+      const pokeNumber = response.data.id;
+      link = `${url}/${pokeNumber}/`;
+      fetchPokemon(link);
     }
   };
 
@@ -50,7 +80,7 @@ function App() {
           <h1 className="main-title">POKEDEX</h1>
 
           <div className="search-and-sort">
-            <Search />
+            <Search getPokemon={getPokemon} />
             <div className="sort">
               <label className="sort-selected">Сортировать</label>
               <span className="sort-arrow">
@@ -72,11 +102,15 @@ function App() {
 
           <div className="pokedex">
             <ul className="pokedex-list">
-              {pokemonData.map((object: PokemonList) => {
-                return <PokemonCard key={object.url} name={object.name} url={object.url} />;
-              })}
+              {isLoading ? (
+                <h1>Loading</h1>
+              ) : (
+                pokemonData.map((object: PokemonList) => {
+                  return <PokemonCard key={object.url} url={object.url} />;
+                })
+              )}
             </ul>
-            <ButtonNext onLoad={onHandleNext} />
+            {nextUrl !== null ? <ButtonNext onLoad={onHandleNext} /> : <></>}
           </div>
         </main>
         <footer className="footer">Stakyy</footer>

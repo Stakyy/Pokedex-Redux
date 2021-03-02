@@ -1,5 +1,7 @@
 export interface PokemonInfo {
   name: string;
+  weight: Number;
+  height: Number;
   sprites: {
     other: {
       dream_world: {
