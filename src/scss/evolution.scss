@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+.evolution {
+  &-list {
+    align-items: center;
+  }
+  .pokedex-item {
+    border-style: none;
+    width: 100px;
+  }
+}
+.abilities {
+  justify-content: center;
+  span {
+    color: black;
+  }
+}
+img {
+  width: 100px;
+}
+h4 {
+  text-transform: capitalize;
+}

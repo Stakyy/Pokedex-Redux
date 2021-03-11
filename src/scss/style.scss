@@ -4,6 +4,10 @@
 @import 'searchandsort.scss';
 @import 'types.scss';
 @import 'button-next.scss';
+@import './pokemon-page.scss';
+@import './evolution.scss';
+@import './pokemon-card.scss';
+
 body {
   background-color: rgb(216, 216, 216);
 }
@@ -46,43 +50,11 @@ body {
     width: 250px;
     border: 1px solid #616161;
     border-radius: 2%;
-    background-color: white;
+    background-color: #f2f2f2;
+
     img {
       border-radius: 3%;
       width: 100%;
-    }
-  }
-}
-
-.pokemon {
-  &-info {
-    text-align: left;
-    margin-left: 3%;
-    .id {
-      font-size: 15px;
-    }
-  }
-  &-name {
-    font-family: 'Press Start 2P';
-    font-size: 15px;
-    line-height: 18px;
-    color: rgb(253, 69, 69);
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  &-abilities {
-    float: left;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    width: 33%;
-    text-align: center;
-
-    border-radius: 5px;
-
-    span {
-      color: white;
-      font-size: 14px;
-      line-height: 22px;
     }
   }
 }

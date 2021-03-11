@@ -1,0 +1,46 @@
+@import './variables.scss';
+.pokemon {
+  &-info {
+    text-align: left;
+    margin-left: 3%;
+    .id {
+      font-size: 15px;
+    }
+  }
+  &-name {
+    font-family: 'Press Start 2P';
+    font-size: 15px;
+    line-height: 18px;
+    color: rgb(253, 69, 69);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  &-abilities {
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    width: 33%;
+    text-align: center;
+
+    border-radius: 5px;
+
+    span {
+      color: white;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+}
+
+.loading-pokeball {
+  margin: 10px;
+  animation: loading-pokebal-rotate 0.5s linear infinite;
+  @keyframes loading-pokebal-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
