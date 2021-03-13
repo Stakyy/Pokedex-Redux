@@ -7,22 +7,24 @@ import { Link } from 'react-router-dom';
 export type data = {
   url: string;
 };
+export const loadPokemon = async (
+  url: string,
+  setState: Function,
+  setSecondState: Function = () => {},
+) => {
+  const response = await axios.get(url);
+  const data = response.data;
+  setState(data);
+  setSecondState(false);
+};
 
 const PokemonCard: React.FC<data> = (data) => {
-  const { url } = data;
-
   const [pokemonInfo, setPokemonInfo] = React.useState<PokemonInfo>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const { url } = data;
 
-  const loadPokemon = async (url: string) => {
-    const response = await axios.get(url);
-    const data = response.data;
-    setIsLoading(false);
-    setPokemonInfo(data);
-    return data;
-  };
   React.useEffect(() => {
-    loadPokemon(url);
+    loadPokemon(url, setPokemonInfo, setIsLoading);
   }, []);
 
   const pokemonImage: string | undefined =
@@ -39,7 +41,7 @@ const PokemonCard: React.FC<data> = (data) => {
               to={{ pathname: `/${pokemonInfo?.name}`, state: { url: url } }}
               className="pokedex-link"
               href="card.html">
-              <img src={pokemonImage} alt="poke" />
+              <img src={pokemonImage} alt={pokemonInfo?.name} />
             </Link>
             <div className="pokemon-info">
               <p className="id">

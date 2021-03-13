@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { evolution_chain, PokemonInfo } from '../interfaces';
+import { Link } from 'react-router-dom';
+import { evolution_chain, PokemonInfo } from '../../interfaces';
+import s from './Evolution.module.scss';
 
 type data = {
   url: string | undefined;
@@ -19,29 +20,34 @@ const Evolution: React.FC<data> = (props) => {
     if (url !== undefined) {
       const response = await axios.get(url);
       setEvoChain(response.data);
-      console.log(response.data);
     }
   };
 
   const firstName = evoChain?.chain.species?.name;
   const secondName = evoChain?.chain?.evolves_to?.[0]?.species?.name;
   const thirdName = evoChain?.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.name;
-  const names: (string | undefined)[] = [];
-  names.push(firstName);
-  names.push(secondName);
-  names.push(thirdName);
-
+  // const names = [firstName, secondName, thirdName];
   // Загрузка покемонов в цепь в стейт
-  const loadChain = async (arr: (string | undefined)[]) => {
-    arr.map(async (name) => {
-      if (name !== undefined) {
-        const response = await axios.get(startUrl + name);
-        const data = await response.data;
-        console.log(data);
+  // const loadChain = async (arr: (string | undefined)[]) => {
+  //   arr.map(async (name) => {
+  //     if (name !== undefined) {
+  //       const response = await axios.get(startUrl + name);
+  //       const data = await response.data;
+  //       setPokemons((prev) => [...prev, { ...data }]);
+  //     }
+  //   });
+  // };
 
-        setPokemons((prev) => [...prev, { ...data }]);
-      }
-    });
+  const loadChain = async (name: string | undefined) => {
+    const response = await axios.get(startUrl + name);
+    const data = await response.data;
+    setPokemons((prev) => [...prev, { ...data }]);
+  };
+
+  const fetchChain = async () => {
+    await loadChain(firstName);
+    await loadChain(secondName);
+    await loadChain(thirdName);
   };
 
   React.useEffect(() => {
@@ -49,8 +55,7 @@ const Evolution: React.FC<data> = (props) => {
   }, [url]);
 
   React.useEffect(() => {
-    loadChain(names);
-    console.log(names);
+    fetchChain();
     return () => {
       setPokemons([]);
     };
@@ -69,18 +74,17 @@ const Evolution: React.FC<data> = (props) => {
   // }, [pokemons]);
 
   return (
-    <div className="evolution">
-      <ul className="evolution-list">
+    <div className={s.evolution}>
+      <h2>Эволюция</h2>
+      <ul className={s.evolution_list}>
         {pokemons?.map((elem) => {
           return (
-            <li key={elem.id} className="evolution-list-item">
+            <li key={elem.id} className={s.evolution_list_item}>
               <Link
                 to={{ pathname: `/${elem.name}`, state: { url: `${startUrl + elem.name + '/'}` } }}>
-                <img
-                  className="pokeImg"
-                  src={elem.sprites.other['official-artwork'].front_default}
-                  alt="pokeImg"
-                />
+                <div className={s.pokeImg}>
+                  <img src={elem.sprites.other['official-artwork'].front_default} alt={elem.name} />
+                </div>
                 <h4>{elem.name}</h4>
               </Link>
               <div className="abilities">

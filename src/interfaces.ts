@@ -76,3 +76,12 @@ export interface evolution_chain {
     };
   };
 }
+export interface evolves_to {
+  evolves_to: [
+    {
+      species: {
+        name: string;
+      };
+    },
+  ];
+}
