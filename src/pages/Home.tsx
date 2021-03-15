@@ -67,28 +67,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="App">
-      <main className="page-main pokedex">
+      <main className=" pokedex container">
         <h1 className="main-title">POKEDEX</h1>
 
         <div className="search-and-sort">
           <Search getPokemon={getPokemon} />
-          {/* <div className="sort">
-              <label className="sort-selected">Сортировать</label>
-              <span className="sort-arrow">
-                <svg className="strelka-bottom-2" viewBox="0 0 9 14">
-                  <path
-                    className="svg-strelka"
-                    d="M6.660,8.922 L6.660,8.922 L2.350,13.408 L0.503,11.486 L4.813,7.000 L0.503,2.515 L2.350,0.592 L8.507,7.000 L6.660,8.922 Z"
-                    width="20px"></path>
-                </svg>
-              </span>
-              <ul className="sort-pokedex">
-                <li className="sort-item">A-Z</li>
-                <li className="sort-item">Z-A</li>
-                <li className="sort-item">По номеру</li>
-                <li className="sort-item">В обратном порядке</li>
-              </ul>
-            </div> */}
         </div>
 
         <div className="pokedex">

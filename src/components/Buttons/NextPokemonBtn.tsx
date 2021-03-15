@@ -29,7 +29,8 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
     <Link
       className={`${style.nav_button} ${style.next}`}
       to={{ pathname: `/${nextPoke?.name}`, state: { url: `${startUrl + nextPoke?.name}` } }}>
-      <span className="number">
+      <span className={style.name}>{nextPoke?.name} </span>{' '}
+      <span className={style.number}>
         #
         {Number(nextPoke?.id) < 10
           ? '00' + nextPoke?.id
@@ -37,7 +38,6 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
           ? '0' + nextPoke?.id
           : nextPoke?.id}
       </span>{' '}
-      <span className={style.name}>{nextPoke?.name} </span>
     </Link>
   );
 };

@@ -3,19 +3,10 @@ import { PokemonInfo } from '../interfaces';
 import axios from 'axios';
 import LoadingPokeball from './LoadingPokeball';
 import { Link } from 'react-router-dom';
+import { loadData } from '../Functions/Funcs';
 
 export type data = {
   url: string;
-};
-export const loadPokemon = async (
-  url: string,
-  setState: Function,
-  setSecondState: Function = () => {},
-) => {
-  const response = await axios.get(url);
-  const data = response.data;
-  setState(data);
-  setSecondState(false);
 };
 
 const PokemonCard: React.FC<data> = (data) => {
@@ -24,7 +15,7 @@ const PokemonCard: React.FC<data> = (data) => {
   const { url } = data;
 
   React.useEffect(() => {
-    loadPokemon(url, setPokemonInfo, setIsLoading);
+    loadData(url, setPokemonInfo, setIsLoading);
   }, []);
 
   const pokemonImage: string | undefined =

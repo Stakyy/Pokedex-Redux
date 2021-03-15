@@ -17,14 +17,8 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
     if (id !== undefined) {
       if (id === 1) {
         await fetchAndSet(startUrl, setPrevPoke, 898);
-        // const response = await axios.get(startUrl + '898');
-        // const data = response.data;
-        // setPrevPoke(data);
       }
       await fetchAndSet(startUrl, setPrevPoke, id - 1);
-      // const response = await axios.get(startUrl + (id - 1));
-      // const data = response.data;
-      // setPrevPoke(data);
     }
   };
 
@@ -37,7 +31,6 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
   }, [props.id]);
 
   return (
-    // <div className={`${style.nav_button} ${style.prev}`}>
     <Link
       className={`${style.nav_button} ${style.prev}`}
       to={{ pathname: `/${prevPoke?.name}`, state: { url: startUrl + prevPoke?.name } }}>

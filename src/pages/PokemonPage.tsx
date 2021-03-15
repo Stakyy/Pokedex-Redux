@@ -4,21 +4,15 @@ import { RouteComponentProps, useLocation } from 'react-router-dom';
 
 import Evolution from '../components/Evolution/Evolution';
 import NextPokemonBtn from '../components/Buttons/NextPokemonBtn';
-import { data, loadPokemon } from '../components/PokemonCard';
+import { data } from '../components/PokemonCard';
 import PrevPokemonBtn from '../components/Buttons/PrevPokemonBtn';
 import { PokemonInfo, species } from '../interfaces';
+import { loadData } from '../Functions/Funcs';
 
 const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
   const [pokemonInfo, setPokemonInfo] = React.useState<PokemonInfo>();
   const [species, setSpecies] = React.useState<species>();
-  // const [evoChain, setEvoChain] = React.useState<evolution_chain>();
   const { state } = useLocation<data>();
-
-  // const loadPokemon = async (url: string) => {
-  //   const response = await axios.get(url);
-  //   const data = response.data;
-  //   setPokemonInfo(data);
-  // };
 
   const loadSpecies = async () => {
     if (pokemonInfo?.name !== undefined) {
@@ -28,15 +22,8 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
     } else console.log('errror');
   };
 
-  // const loadEvoChain = async () => {
-  //   if (species?.evolution_chain?.url !== undefined) {
-  //     const response = await axios.get(species.evolution_chain.url);
-  //     setEvoChain(response.data);
-  //   }
-  // };
-
   React.useEffect(() => {
-    loadPokemon(state.url, setPokemonInfo);
+    loadData(state.url, setPokemonInfo);
     return () => {
       window.scrollTo(0, 0);
     };
@@ -45,10 +32,6 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
   React.useEffect(() => {
     loadSpecies();
   }, [pokemonInfo]);
-
-  // React.useEffect(() => {
-  //   loadEvoChain();
-  // }, [species]);
 
   const pokemonImage: string | undefined =
     pokemonInfo?.sprites.other['official-artwork'].front_default;
@@ -73,7 +56,8 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
           <div className="pokemon-image">
             <img src={pokemonImage} alt={pokemonInfo?.name} />
           </div>
-          <section className="statistic">
+          <div className="text">{species?.flavor_text_entries[1]?.flavor_text}</div>
+          <div className="types">
             <h3 className="stats-title">Тип</h3>
             <div className="abilities">
               {pokemonInfo?.types.map((type) => {
@@ -84,50 +68,50 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
                 );
               })}
             </div>
-            <div className="stats">
-              <h3 className="stats-title">Stats</h3>
-              <ul className="stats-table">
-                {pokemonInfo?.stats.map((stat) => (
-                  <li key={stat.stat.name} className="stats-row">
-                    <div className="stats-name">{stat.stat.name.replace('-', ' ')}</div>
-                    <div className="stats-value">
-                      <div
-                        className="stats-line"
-                        style={{ width: `${(stat.base_stat / 200) * 100}%` }}>
-                        {stat.base_stat}
-                      </div>
+          </div>
+          <div className="stats">
+            <h3 className="stats-title">Stats</h3>
+            <ul className="stats-table">
+              {pokemonInfo?.stats.map((stat) => (
+                <li key={stat.stat.name} className="stats-row">
+                  <div className="stats-name">{stat.stat.name.replace('-', ' ')}</div>
+                  <div className="stats-value">
+                    <div
+                      className="stats-line"
+                      style={{ width: `${(stat.base_stat / 250) * 100}%` }}>
+                      {stat.base_stat}
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="info">
-              <div className="info-height">
-                <h3>Рост</h3>
-                {Number(pokemonInfo?.height) / 10} Метра
-              </div>
-              <div className="info-weight">
-                <h3>Вес</h3>
-                {Number(pokemonInfo?.weight) / 10} кг
-              </div>
-              <div className="info-abilities">
-                <h3>Способности</h3>
-                {pokemonInfo?.abilities.map((ability) => {
-                  if (!ability.is_hidden)
-                    return (
-                      <span key={ability.ability.name} className="info-abilities_ability">
-                        {ability.ability.name.replace('-', ' ')}
-                      </span>
-                    );
-                })}
-              </div>
+          <div className="info">
+            <div className="info-height">
+              <h3>Рост</h3>
+              {Number(pokemonInfo?.height) / 10} Метра
             </div>
-          </section>
-          <section>
-            <Evolution url={species?.evolution_chain.url} />
-          </section>
+            <div className="info-weight">
+              <h3>Вес</h3>
+              {Number(pokemonInfo?.weight) / 10} кг
+            </div>
+            <div className="info-abilities">
+              <h3>Способности</h3>
+              {pokemonInfo?.abilities.map((ability) => {
+                if (!ability.is_hidden)
+                  return (
+                    <span key={ability.ability.name} className="info-abilities_ability">
+                      {ability.ability.name.replace('-', ' ')}
+                    </span>
+                  );
+              })}
+            </div>
+          </div>
         </div>
+        <section>
+          <Evolution url={species?.evolution_chain.url} />
+        </section>
       </div>
     </div>
   );

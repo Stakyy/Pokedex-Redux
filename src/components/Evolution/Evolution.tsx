@@ -15,7 +15,7 @@ const Evolution: React.FC<data> = (props) => {
   const [pokemons, setPokemons] = React.useState<PokemonInfo[]>([]);
   const { url } = props;
 
-  // загрузка данных эворлюции
+  // загрузка данных эволюции
   const loadEvoChain = async () => {
     if (url !== undefined) {
       const response = await axios.get(url);
@@ -23,20 +23,9 @@ const Evolution: React.FC<data> = (props) => {
     }
   };
 
-  const firstName = evoChain?.chain.species?.name;
+  const firstName = evoChain?.chain?.species?.name;
   const secondName = evoChain?.chain?.evolves_to?.[0]?.species?.name;
   const thirdName = evoChain?.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.name;
-  // const names = [firstName, secondName, thirdName];
-  // Загрузка покемонов в цепь в стейт
-  // const loadChain = async (arr: (string | undefined)[]) => {
-  //   arr.map(async (name) => {
-  //     if (name !== undefined) {
-  //       const response = await axios.get(startUrl + name);
-  //       const data = await response.data;
-  //       setPokemons((prev) => [...prev, { ...data }]);
-  //     }
-  //   });
-  // };
 
   const loadChain = async (name: string | undefined) => {
     const response = await axios.get(startUrl + name);
@@ -61,18 +50,6 @@ const Evolution: React.FC<data> = (props) => {
     };
   }, [evoChain]);
 
-  // React.useEffect(() => {
-  //   fetchChain();
-  //   return () => {
-  //     setPokemons([]);
-  //   };
-  // }, [firstName, secondName, thirdName]);
-
-  // React.useEffect(() => {
-  //   console.log(pokemons);
-  //   pokemons.sort((poke1, poke2) => Number(poke1.id) - Number(poke2?.id));
-  // }, [pokemons]);
-
   return (
     <div className={s.evolution}>
       <h2>Эволюция</h2>
@@ -85,7 +62,7 @@ const Evolution: React.FC<data> = (props) => {
                 <div className={s.pokeImg}>
                   <img src={elem.sprites.other['official-artwork'].front_default} alt={elem.name} />
                 </div>
-                <h4>{elem.name}</h4>
+                <h4 className={s.name}>{elem.name}</h4>
               </Link>
               <div className="abilities">
                 {elem.types.map((abil) => {
@@ -105,32 +82,3 @@ const Evolution: React.FC<data> = (props) => {
 };
 
 export default Evolution;
-
-// {pokemons?.map((elem) => {
-//   return (
-//     <li key={elem.id} className="evolution-list-item">
-//       <Link
-//         to={{ pathname: `/${elem.name}`, state: { url: `${startUrl + elem.name + '/'}` } }}>
-//         <img
-//           className="pokeImg"
-//           src={elem.sprites.other['official-artwork'].front_default}
-//           alt="pokeImg"
-//         />
-//         <h4>{elem.name}</h4>
-//       </Link>
-//       <div className="abilities">
-//         {elem.abilities.map((abil) => {
-//           return (
-//             <div
-//               key={abil.ability.name}
-//               className={'pokemon-abilities ' + abil.ability.name}>
-//               <span>{abil.ability.name}</span>
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </li>
-//   );
-// })}
-
-// {names.map((name) => (name ? <PokemonCard key={name} url={startUrl + name} /> : null))}
