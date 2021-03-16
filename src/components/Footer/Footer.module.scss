@@ -1,0 +1,64 @@
+@import '../../scss/variables.scss';
+.footer {
+  background-color: #243236;
+  height: 80px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pokeapi {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: space-around;
+  img {
+    width: 30%;
+  }
+}
+.stakyy {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  justify-content: space-around;
+}
+
+.text {
+  font-family: 'Russo One';
+  font-size: 14px;
+  color: white;
+}
+.link {
+  a {
+    color: white;
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .pokeapi {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 40%;
+    }
+  }
+
+  .stakyy {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .text {
+    margin-right: 20px;
+  }
+  .link:hover {
+    a {
+      color: #ffcb43;
+    }
+  }
+}

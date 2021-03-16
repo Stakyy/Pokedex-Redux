@@ -1,0 +1,24 @@
+@import '../scss/variables.scss';
+
+.minipage {
+  padding-top: 80px;
+  margin: 0 10px;
+  h1 {
+    text-align: center;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .pokedex_mini {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+@media (min-width: $desktop-width) {
+  .minipage {
+    padding-top: 0;
+  }
+}

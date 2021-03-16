@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { loadData } from '../../Functions/Funcs';
 import { evolution_chain, PokemonInfo } from '../../interfaces';
 import s from './Evolution.module.scss';
 
@@ -16,12 +17,12 @@ const Evolution: React.FC<data> = (props) => {
   const { url } = props;
 
   // загрузка данных эволюции
-  const loadEvoChain = async () => {
-    if (url !== undefined) {
-      const response = await axios.get(url);
-      setEvoChain(response.data);
-    }
-  };
+  // const loadEvoChain = async () => {
+  //   if (url !== undefined) {
+  //     const response = await axios.get(url);
+  //     setEvoChain(response.data);
+  //   }
+  // };
 
   const firstName = evoChain?.chain?.species?.name;
   const secondName = evoChain?.chain?.evolves_to?.[0]?.species?.name;
@@ -40,7 +41,7 @@ const Evolution: React.FC<data> = (props) => {
   };
 
   React.useEffect(() => {
-    loadEvoChain();
+    loadData(url, setEvoChain);
   }, [url]);
 
   React.useEffect(() => {

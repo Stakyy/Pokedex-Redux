@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import About from './pages/About';
 import Home from './pages/Home';
+import MiniPage from './pages/MiniPage';
 import PokemonPage from './pages/PokemonPage';
 
 function App() {
@@ -11,9 +14,11 @@ function App() {
         <Header />
         <Switch>
           <Route component={Home} path="/" exact />
-          <Route component={PokemonPage} path="/:pokemon" />
+          <Route path="/mini" exact component={MiniPage} />
+          <Route path="/about" exact component={About} />
+          <Route component={PokemonPage} path="/:pokemon" exact />
         </Switch>
-        <footer className="footer">Stakyy</footer>
+        <Footer />
       </div>
     </BrowserRouter>
   );

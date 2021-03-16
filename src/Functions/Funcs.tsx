@@ -7,12 +7,14 @@ export const fetchAndSet = async (url: string, setState: Function, id: number) =
 };
 
 export const loadData = async (
-  url: string,
+  url: string | undefined,
   setState: Function,
   setSecondState: Function = () => {},
 ) => {
-  const response = await axios.get(url);
-  const data = response.data;
-  setState(data);
-  setSecondState(false);
+  if (url !== undefined) {
+    const response = await axios.get(url);
+    const data = response.data;
+    setState(data);
+    setSecondState(false);
+  }
 };

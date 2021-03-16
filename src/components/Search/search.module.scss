@@ -1,0 +1,46 @@
+@import '../../scss/variables.scss';
+
+.search {
+  margin-top: 20px;
+
+  font-size: 24px;
+  background-color: rgb(46, 45, 45);
+  border-radius: 10px;
+  line-height: 100px;
+  padding: 10px;
+  height: 50px;
+
+  input {
+    font-size: 20px;
+    border: 1px solid grey;
+    border-radius: 5px 0 0 5px;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  button {
+    width: 20%;
+    height: 29px;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    background-image: url('../Search/assets/search.png');
+    background-color: #ffcb43;
+    float: left;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: $tablet-width) {
+}
+
+@media (min-width: $desktop-width) {
+  .search {
+    width: 45%;
+    margin-right: 0;
+  }
+}

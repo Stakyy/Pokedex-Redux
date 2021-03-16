@@ -2,7 +2,7 @@ import React from 'react';
 
 import PokemonCard from '../components/PokemonCard';
 import axios from 'axios';
-import Search from '../components/Search';
+import Search from '../components/Search/Search';
 import ButtonNext from '../components/ButtonNext';
 
 type PokemonList = {
@@ -66,28 +66,26 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="App">
-      <main className=" pokedex container">
-        <h1 className="main-title">POKEDEX</h1>
+    <main className="pokedex-container">
+      <h1 className="main-title">POKEDEX</h1>
 
-        <div className="search-and-sort">
-          <Search getPokemon={getPokemon} />
-        </div>
+      <div className="search">
+        <Search getPokemon={getPokemon} />
+      </div>
 
-        <div className="pokedex">
-          <ul className="pokedex-list">
-            {isLoading && !pokemonData ? (
-              <h1>Loading</h1>
-            ) : (
-              pokemonData.map((object: PokemonList) => {
-                return <PokemonCard key={object.url} url={object.url} />;
-              })
-            )}
-          </ul>
-          {nextUrl !== null ? <ButtonNext onLoad={onHandleNext} /> : <></>}
-        </div>
-      </main>
-    </div>
+      <div className="pokedex">
+        <ul className="pokedex-list">
+          {isLoading && !pokemonData ? (
+            <h1>Loading</h1>
+          ) : (
+            pokemonData.map((object: PokemonList) => {
+              return <PokemonCard key={object.url} url={object.url} />;
+            })
+          )}
+        </ul>
+        {nextUrl !== null ? <ButtonNext onLoad={onHandleNext} /> : <></>}
+      </div>
+    </main>
   );
 };
 

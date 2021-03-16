@@ -3,6 +3,7 @@ export interface PokemonInfo {
   weight: Number;
   height: Number;
   sprites: {
+    front_default: string;
     other: {
       dream_world: {
         front_default: string;

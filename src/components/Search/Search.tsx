@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './search.module.scss';
 
 interface searchProps {
   getPokemon(name: string): Promise<void>;
@@ -18,7 +19,7 @@ const Search: React.FC<searchProps> = (props) => {
   };
 
   return (
-    <div className="search">
+    <div className={s.search}>
       <form action="get">
         <input
           id="search"

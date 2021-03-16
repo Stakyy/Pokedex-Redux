@@ -1,10 +1,5 @@
 @import '../../scss/variables.scss';
 
-.buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-}
 .nav_button {
   background-color: rgb(114, 114, 114);
   width: 49%;
@@ -15,7 +10,8 @@
   // height: 40px;
 
   &.prev {
-    text-align: right;
+    // text-align: right;
+
     &::before {
       position: relative;
       float: left;

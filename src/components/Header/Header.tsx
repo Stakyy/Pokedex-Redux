@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from './assets/poke-logo.svg';
 import s from './Header.module.scss';
 function Header() {
@@ -6,7 +7,6 @@ function Header() {
 
   const onToggle = () => {
     setActive(!isActive);
-    console.log(isActive);
   };
 
   return (
@@ -20,14 +20,14 @@ function Header() {
             <span></span>
           </div>
           <ul id="nav-mobile" className={`${s.nav}` + ' ' + ` ${isActive ? `${s.opened}` : ''}`}>
-            <li className={s.nav_item}>
-              <a href="/">Pokedex</a>
+            <li className={s.nav_item} onClick={() => setActive(false)}>
+              <Link to="/">Pokedex</Link>
             </li>
-            <li className={s.nav_item}>
-              <a href="/">Мини версия</a>
+            <li className={s.nav_item} onClick={() => setActive(false)}>
+              <Link to="/mini">Мини версия</Link>
             </li>
-            <li className={s.nav_item}>
-              <a href="/">About</a>
+            <li className={s.nav_item} onClick={() => setActive(false)}>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </div>

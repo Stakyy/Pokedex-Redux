@@ -18,19 +18,17 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
     if (pokemonInfo?.name !== undefined) {
       const response = await axios.get(pokemonInfo.species.url);
       setSpecies(response.data);
-      console.log(pokemonInfo.name);
-    } else console.log('errror');
+    }
   };
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     loadData(state.url, setPokemonInfo);
-    return () => {
-      window.scrollTo(0, 0);
-    };
+    // return () => {};
   }, [state]);
 
   React.useEffect(() => {
-    loadSpecies();
+    loadData(pokemonInfo?.species.url, setSpecies);
   }, [pokemonInfo]);
 
   const pokemonImage: string | undefined =
@@ -42,15 +40,16 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
         <PrevPokemonBtn id={pokemonInfo?.id} />
         <NextPokemonBtn id={pokemonInfo?.id} />
       </div>
-      <div className="container">
-        <h2 className="pokemon-page-name">
+
+      <div className="container-page">
+        <h3 className="pokemon-page-name">
           {pokemonInfo?.name[0].toUpperCase() + '' + pokemonInfo?.name.slice(1) + ' '}#
           {Number(pokemonInfo?.id) < 10
             ? '00' + pokemonInfo?.id
             : Number(pokemonInfo?.id) >= 10 && Number(pokemonInfo?.id) < 100
             ? '0' + pokemonInfo?.id
             : pokemonInfo?.id}
-        </h2>
+        </h3>
 
         <div className="pokemon-about">
           <div className="pokemon-image">
