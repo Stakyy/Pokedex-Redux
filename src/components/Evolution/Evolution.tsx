@@ -25,16 +25,19 @@ const Evolution: React.FC<data> = (props) => {
   //   }
   // };
 
+  // имена покемонов
   const firstName = evoChain?.chain?.species?.name;
   const secondName = evoChain?.chain?.evolves_to?.[0]?.species?.name;
   const thirdName = evoChain?.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.name;
 
+  // загрузка данный покемонов и добавление в список
   const loadChain = async (name: string | undefined) => {
     const response = await axios.get(startUrl + name);
     const data = await response.data;
     setPokemons((prev) => [...prev, { ...data }]);
   };
 
+  // последовательное добавления, чтобы не нарушить цепь
   const fetchChain = async () => {
     await loadChain(firstName);
     await loadChain(secondName);

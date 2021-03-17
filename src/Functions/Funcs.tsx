@@ -7,6 +7,7 @@ export const fetchAndSet = async (url: string, setState: Function, id: number) =
   setState(data);
 };
 
+// стандартная загрузка почти любых данных с сервера
 export const loadData = async (
   url: string | undefined,
   setState: Function,
