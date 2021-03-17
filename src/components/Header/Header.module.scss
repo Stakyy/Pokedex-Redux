@@ -57,6 +57,19 @@
       left: 0;
       bottom: 0;
     }
+    &.active {
+      &::before {
+        transform: rotate(45deg);
+        top: 9px;
+      }
+      &::after {
+        transform: rotate(-45deg);
+        bottom: 9px;
+      }
+      span {
+        display: none;
+      }
+    }
   }
 }
 .nav {
@@ -139,7 +152,8 @@
     justify-content: space-between;
     align-items: center;
   }
-  .nav {
+  .nav,
+  .nav.opened {
     width: 100%;
     background-color: transparent;
     position: static;

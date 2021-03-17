@@ -26,7 +26,6 @@ const Search: React.FC<searchProps> = (props) => {
           placeholder="Введите имя или номер"
           value={val}
           onChange={changeHandler}
-          // onKeyPress={(event) => search(event, val)}
         />
         <button onClick={(event) => search(event, val)}>
           <i className="button-img"></i>

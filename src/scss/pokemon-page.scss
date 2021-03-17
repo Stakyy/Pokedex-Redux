@@ -5,8 +5,8 @@
 .pokemon-page {
   padding-top: 100px;
   &-name {
+    color: #056475;
     font-family: 'Russo One';
-
     position: relative;
     text-align: center;
     line-height: 30px;
@@ -71,7 +71,9 @@
     }
 
     &-name {
+      font-family: 'Russo One';
       align-self: center;
+      font-size: 12px;
       text-transform: uppercase;
       width: 30%;
     }
@@ -100,10 +102,13 @@
     }
   }
   .info {
+    min-height: 100px;
+    padding: 20px;
     h3 {
-      color: white;
+      color: rgb(248, 218, 50);
+      margin: 10px 0;
     }
-    padding-left: 5px;
+
     margin: 30px auto;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -113,16 +118,20 @@
     &-abilities {
       &_ability {
         text-transform: capitalize;
+        font-family: 'Russo One';
       }
     }
   }
 }
 
 @media (min-width: $tablet-width) {
+  .pokemon-page-name {
+    font-size: 22px;
+  }
   .pokemon-about {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 150px 1rf;
+    grid-template-rows: 1fr 150px 1;
     margin: 0 10px;
     grid-template-areas:
       'image text'
@@ -146,11 +155,19 @@
     margin-top: 20px;
     font-size: 20px;
     font-family: fantasy;
+
+    .stats-name {
+      font-size: 15px;
+    }
   }
 
   .info {
     grid-area: info;
     width: 90%;
+    h3 {
+      font-family: Russo One;
+      font-size: 16px;
+    }
   }
 
   .text {
@@ -164,5 +181,8 @@
   .pokemon-page {
     padding-top: 0;
     margin-top: 30px;
+    .stats-name {
+      font-size: 18px;
+    }
   }
 }

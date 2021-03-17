@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './button.module.scss';
 
 type nextUrl = {
   onLoad: () => void;
@@ -6,7 +7,7 @@ type nextUrl = {
 
 const ButtonNext: React.FC<nextUrl> = ({ onLoad }) => {
   return (
-    <div className="button-next" onClick={onLoad}>
+    <div className={s.button} onClick={onLoad}>
       Загрузить еще
     </div>
   );

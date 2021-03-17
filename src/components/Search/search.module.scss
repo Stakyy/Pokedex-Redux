@@ -2,7 +2,6 @@
 
 .search {
   margin-top: 20px;
-
   font-size: 24px;
   background-color: rgb(46, 45, 45);
   border-radius: 10px;
@@ -17,6 +16,7 @@
     float: left;
     width: 80%;
     background: #f1f1f1;
+    height: 29px;
   }
   button {
     width: 20%;
@@ -40,7 +40,7 @@
 
 @media (min-width: $desktop-width) {
   .search {
-    width: 45%;
-    margin-right: 0;
+    width: 50%;
+    margin: 10px auto;
   }
 }

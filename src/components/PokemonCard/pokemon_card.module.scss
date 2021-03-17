@@ -1,13 +1,15 @@
-@import './variables.scss';
+@import '../../scss/variables.scss';
 .pokemon {
-  &-info {
+  &_info {
     text-align: left;
     margin-left: 3%;
     .id {
-      font-size: 15px;
+      font-family: 'Russo One';
+      font-size: 16px;
+      color: white;
     }
   }
-  &-name {
+  &_name {
     font-family: 'Press Start 2P';
     font-size: 15px;
     line-height: 18px;
@@ -15,7 +17,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  &-abilities {
+  &_types {
     float: left;
     margin-right: 5%;
     margin-bottom: 5%;
@@ -24,23 +26,11 @@
 
     border-radius: 5px;
 
-    span {
+    .type {
+      font-family: Russo One, sans-serif;
       color: white;
       font-size: 14px;
       line-height: 22px;
-    }
-  }
-}
-
-.loading-pokeball {
-  margin: 10px;
-  animation: loading-pokebal-rotate 0.5s linear infinite;
-  @keyframes loading-pokebal-rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
     }
   }
 }

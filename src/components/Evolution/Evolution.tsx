@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { loadData } from '../../Functions/Funcs';
 import { evolution_chain, PokemonInfo } from '../../interfaces';
 import s from './Evolution.module.scss';
+import t from '../PokemonCard/pokemon_card.module.scss';
 
 type data = {
   url: string | undefined;
@@ -68,8 +69,8 @@ const Evolution: React.FC<data> = (props) => {
               <div className="abilities">
                 {elem.types.map((abil) => {
                   return (
-                    <div key={abil.type.name} className={'pokemon-abilities ' + abil.type.name}>
-                      <span>{abil.type.name}</span>
+                    <div key={abil.type.name} className={`${t.pokemon_types} ` + abil.type.name}>
+                      <span className={t.type}>{abil.type.name}</span>
                     </div>
                   );
                 })}

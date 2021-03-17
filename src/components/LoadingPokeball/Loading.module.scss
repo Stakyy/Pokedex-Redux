@@ -1,0 +1,12 @@
+.loading {
+  margin: 10px;
+  animation: loading-pokebal-rotate 0.5s linear infinite;
+}
+@keyframes loading-pokebal-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

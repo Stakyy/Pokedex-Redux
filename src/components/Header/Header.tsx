@@ -2,12 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from './assets/poke-logo.svg';
 import s from './Header.module.scss';
-function Header() {
+
+const Header: React.FC = () => {
   const [isActive, setActive] = React.useState(false);
 
   const onToggle = () => {
     setActive(!isActive);
   };
+
+  window.addEventListener('orientationchange', function () {
+    setActive(false);
+  });
 
   return (
     <header className={s.header}>
@@ -16,7 +21,9 @@ function Header() {
           <a className={s.header_logo} href="/">
             <img src={logo} alt="logo" />
           </a>
-          <div onClick={onToggle} className={s.header_burger}>
+          <div
+            onClick={onToggle}
+            className={`${s.header_burger}` + ' ' + `${isActive ? `${s.active}` : ''}`}>
             <span></span>
           </div>
           <ul id="nav-mobile" className={`${s.nav}` + ' ' + ` ${isActive ? `${s.opened}` : ''}`}>
@@ -34,6 +41,6 @@ function Header() {
       </nav>
     </header>
   );
-}
+};
 
 export default Header;

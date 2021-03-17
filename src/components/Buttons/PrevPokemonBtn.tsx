@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAndSet } from '../../Functions/Funcs';
 import { PokemonInfo } from '../../interfaces';
-import style from './Buttons.module.scss';
+import s from './Buttons.module.scss';
 
 type data = {
   id: number | undefined;
@@ -32,9 +32,9 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
 
   return (
     <Link
-      className={`${style.nav_button} ${style.prev}`}
+      className={`${s.nav_button} ${s.prev}`}
       to={{ pathname: `/${prevPoke?.name}`, state: { url: startUrl + prevPoke?.name } }}>
-      <span className="number">
+      <span className={s.number}>
         #
         {Number(prevPoke?.id) < 10
           ? '00' + prevPoke?.id
@@ -42,7 +42,7 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
           ? '0' + prevPoke?.id
           : prevPoke?.id}
       </span>{' '}
-      <span className={style.name}>{prevPoke?.name} </span>
+      <span className={s.name}>{prevPoke?.name} </span>
     </Link>
   );
 };

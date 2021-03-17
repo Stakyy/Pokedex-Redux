@@ -3,7 +3,8 @@
 .about {
   padding-top: 100px;
   text-align: center;
-  min-height: 100%;
+
+  min-height: calc(100vh - 80px);
 }
 
 .container {
@@ -40,5 +41,12 @@
     display: inline-block;
     width: 50%;
     text-align: center;
+  }
+}
+
+@media (min-width: $desktop-width) {
+  .about {
+    padding-top: 0;
+    margin-top: 30px;
   }
 }

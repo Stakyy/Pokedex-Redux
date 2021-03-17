@@ -1,9 +1,9 @@
 import React from 'react';
 
-import PokemonCard from '../components/PokemonCard';
+import PokemonCard from '../components/PokemonCard/PokemonCard';
 import axios from 'axios';
 import Search from '../components/Search/Search';
-import ButtonNext from '../components/ButtonNext';
+import ButtonNext from '../components/ButtonNext/ButtonNext';
 
 type PokemonList = {
   name: string;

@@ -1,30 +1,29 @@
 import axios from 'axios';
 import React from 'react';
 import { RouteComponentProps, useLocation } from 'react-router-dom';
-
 import Evolution from '../components/Evolution/Evolution';
 import NextPokemonBtn from '../components/Buttons/NextPokemonBtn';
-import { data } from '../components/PokemonCard';
+import { data } from '../components/PokemonCard/PokemonCard';
 import PrevPokemonBtn from '../components/Buttons/PrevPokemonBtn';
 import { PokemonInfo, species } from '../interfaces';
 import { loadData } from '../Functions/Funcs';
+import s from '../components/PokemonCard/pokemon_card.module.scss';
+
+const url = 'https://pokeapi.co/api/v2/pokemon';
 
 const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
   const [pokemonInfo, setPokemonInfo] = React.useState<PokemonInfo>();
   const [species, setSpecies] = React.useState<species>();
-  const { state } = useLocation<data>();
-
-  const loadSpecies = async () => {
-    if (pokemonInfo?.name !== undefined) {
-      const response = await axios.get(pokemonInfo.species.url);
-      setSpecies(response.data);
-    }
-  };
+  let { state } = useLocation<data>();
+  const data = useLocation();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    loadData(state.url, setPokemonInfo);
-    // return () => {};
+    if (state !== undefined) {
+      loadData(state.url, setPokemonInfo);
+    } else {
+      loadData(url + data.pathname, setPokemonInfo);
+    }
   }, [state]);
 
   React.useEffect(() => {
@@ -61,8 +60,8 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
             <div className="abilities">
               {pokemonInfo?.types.map((type) => {
                 return (
-                  <div key={type.type.name} className={'pokemon-abilities ' + type.type.name}>
-                    <span>{type.type.name}</span>
+                  <div key={type.type.name} className={`${s.pokemon_types} ` + type.type.name}>
+                    <span className={s.type}>{type.type.name}</span>
                   </div>
                 );
               })}
@@ -100,9 +99,9 @@ const PokemonPage: React.FunctionComponent<RouteComponentProps> = () => {
               {pokemonInfo?.abilities.map((ability) => {
                 if (!ability.is_hidden)
                   return (
-                    <span key={ability.ability.name} className="info-abilities_ability">
+                    <div key={ability.ability.name} className="info-abilities_ability">
                       {ability.ability.name.replace('-', ' ')}
-                    </span>
+                    </div>
                   );
               })}
             </div>

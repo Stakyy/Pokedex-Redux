@@ -6,12 +6,8 @@
   height: 70px;
   line-height: 40px;
   border-radius: 10px;
-
-  // height: 40px;
-
+  font-family: 'Russo One';
   &.prev {
-    // text-align: right;
-
     &::before {
       position: relative;
       float: left;
@@ -54,8 +50,14 @@
   &:hover {
     background-color: #12a7d3;
   }
+  .number {
+    font-family: 'Russo One';
+    color: #fff;
+  }
   .name {
+    font-family: 'Russo One';
     display: none;
+    color: #222121;
   }
 }
 
@@ -63,7 +65,7 @@
   .nav_button {
     .name {
       display: inline-block;
-      color: black;
+
       text-transform: capitalize;
     }
   }
