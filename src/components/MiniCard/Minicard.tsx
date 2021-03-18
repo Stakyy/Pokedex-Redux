@@ -21,10 +21,12 @@ const Minicard: React.FC<data> = (data) => {
   return (
     <Link to={{ pathname: `/${pokemon?.name}`, state: { url: url } }} className={s.minicard}>
       <div className={s.minicard_image}>
-        <img src={pokemon?.sprites.front_default} alt={pokemon?.name} />
+        <img src={pokemon && pokemon?.sprites.front_default} alt={pokemon?.name} />
       </div>
       <div className={s.info}>
-        <div className={s.minicard_number}>{` #${pokemon?.id}`}</div>
+        <div className={s.minicard_number}>{` #${
+          pokemon?.id !== undefined ? pokemon?.id : ''
+        }`}</div>
         <div className={s.minicard_name}>{`${name}`}</div>
       </div>
     </Link>
