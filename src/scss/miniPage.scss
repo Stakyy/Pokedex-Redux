@@ -8,13 +8,19 @@
     margin-bottom: 20px;
   }
 }
-
-@media (min-width: $tablet-width) {
+@media (min-width: 620px) {
+  .minipage {
+    width: 100%;
+  }
   .pokedex_mini {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
   }
+}
+
+@media (min-width: $tablet-width) {
 }
 
 @media (min-width: $desktop-width) {

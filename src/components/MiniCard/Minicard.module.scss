@@ -40,11 +40,12 @@
   }
 }
 
-@media (min-width: $tablet-width) {
+@media (min-width: 620px) {
   .minicard {
     width: 300px;
-    height: 80px;
-    justify-content: left;
     margin: 5px;
   }
+}
+
+@media (min-width: $tablet-width) {
 }
