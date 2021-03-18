@@ -24,7 +24,6 @@ const PrevPokemonBtn: React.FC<data> = (props) => {
 
   React.useEffect(() => {
     loadPokemon(props.id);
-    console.log(prevPoke);
     return () => {
       setPrevPoke(undefined);
     };
