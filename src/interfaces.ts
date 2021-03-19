@@ -86,3 +86,8 @@ export interface evolves_to {
     },
   ];
 }
+
+export interface pokemonList {
+  name: string;
+  url: string;
+}
