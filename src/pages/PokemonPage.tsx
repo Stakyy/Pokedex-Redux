@@ -8,6 +8,8 @@ import PrevPokemonBtn from '../components/Buttons/PrevPokemonBtn';
 import { PokemonInfo, species } from '../interfaces';
 import { loadData } from '../Functions/Funcs';
 import s from '../components/PokemonCard/pokemon_card.module.scss';
+import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const url = 'https://pokeapi.co/api/v2/pokemon';
 

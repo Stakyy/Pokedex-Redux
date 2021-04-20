@@ -4,6 +4,10 @@ import PokemonCard from '../components/PokemonCard/PokemonCard';
 import axios from 'axios';
 import Search from '../components/Search/Search';
 import ButtonNext from '../components/ButtonNext/ButtonNext';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { fetchPokemons } from '../redux/actions/pokemons';
+import { useActions } from '../hooks/useAction';
 
 type PokemonList = {
   name: string;
@@ -14,18 +18,21 @@ const url = 'https://pokeapi.co/api/v2/pokemon';
 
 const Home: React.FC = () => {
   const [pokemonData, setPokemonData] = React.useState<PokemonList[]>([]);
-  const [nextUrl, setNextUrl] = React.useState<string | null>(url);
+  // const [nextUrl, setNextUrl] = React.useState<string | null>(url);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const { items, loading, error, nextUrl } = useTypedSelector((state) => state.pokemons);
+
+  const { fetchPokemons, fetchAndAddPokemons } = useActions();
 
   //стартовая загрузка покемонов
-  const loadPokemons = async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
-    const data = response.data.results;
-    const nextUrl = response.data.next;
-    setPokemonData(data);
-    setNextUrl(nextUrl);
-    setIsLoading(false);
-  };
+  // const loadPokemons = async () => {
+  //   const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
+  //   const data = response.data.results;
+  //   const nextUrl = response.data.next;
+  //   setPokemonData(data);
+  //   setNextUrl(nextUrl);
+  //   setIsLoading(false);
+  // };
   // Загрузка покемонов по кнопке
   const onHandleNext = async () => {
     if (nextUrl !== null) {
@@ -33,7 +40,7 @@ const Home: React.FC = () => {
       const data = response.data.results;
       const next = response.data.next;
       setPokemonData([...pokemonData, ...data]);
-      setNextUrl(next);
+      // setNextUrl(next);
     }
   };
 
@@ -45,24 +52,25 @@ const Home: React.FC = () => {
   };
 
   //Функция поиска покемона из инпута
-  const getPokemon = async (nameOrNumber: any) => {
+  const getPokemon = async (nameOrNumber: string | number) => {
     let link: string;
 
     if (nameOrNumber === '') {
-      loadPokemons();
-    } else if (!isNaN(nameOrNumber)) {
+      // loadPokemons();
+    } else if (typeof nameOrNumber === 'number' && !isNaN(nameOrNumber)) {
       link = `${url}/${nameOrNumber}`;
       fetchPokemon(link);
-      setNextUrl(null);
-    } else {
+      // setNextUrl(null);
+    } else if (typeof nameOrNumber === 'string') {
       link = `${url}/${nameOrNumber.toLowerCase()}`;
       fetchPokemon(link);
-      setNextUrl(null);
+      // setNextUrl(null);
     }
   };
 
   React.useEffect(() => {
-    loadPokemons();
+    fetchPokemons();
+    // loadPokemons();
   }, []);
 
   return (
@@ -78,12 +86,22 @@ const Home: React.FC = () => {
           {isLoading && !pokemonData ? (
             <h1>Loading</h1>
           ) : (
-            pokemonData.map((object: PokemonList) => {
+            items.map((object: PokemonList) => {
               return <PokemonCard key={object.url} url={object.url} />;
             })
           )}
         </ul>
-        {nextUrl !== null ? <ButtonNext onLoad={onHandleNext} /> : <></>}
+        {/* {nextUrl !== null ? <ButtonNext onLoad={fetchAndAddPokemons(nextUrl)} /> : <></>} */}
+        {nextUrl !== null ? (
+          <button
+            onClick={() => {
+              fetchAndAddPokemons(nextUrl);
+            }}>
+            Next
+          </button>
+        ) : (
+          ''
+        )}
       </div>
     </main>
   );
